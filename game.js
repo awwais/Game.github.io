@@ -6,6 +6,22 @@ var userClickedPattern = [];
 
 var started = false;
 var level = 0;
+var detectTap = false;
+
+$(document).on('touchstart', function() {
+    detectTap = true; // Detects all touch events
+});
+$(document).on('touchmove', function() {
+    detectTap = false; // Excludes the scroll events from touch events
+});
+$(document).on('click touchend', function(event) {
+    if (event.type == "click") detectTap = true; // Detects click events
+       if (detectTap){
+          nextSequence();
+         started = true;
+
+       }
+ });
 
 $(document).keypress(function() {
   if (!started) {
